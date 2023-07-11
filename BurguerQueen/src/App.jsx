@@ -1,13 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import { useState } from 'react'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
 import './App.css'
+import {Logo} from './Logo/logo'
+import { ButtonWaiter } from './ButtonWaiter/ButtonWaiter'
+import { ButtonKitchen } from './ButtonKitchen/ButtonKitchen'
+import { ButtonAdmin } from './ButtonAdmin/ButtonAdmin'
+import './buttons.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <h1>Hola</h1>
+    <>
+    <Logo  />
+<div className='containerButtons'>
+   <ButtonWaiter />
+    <ButtonKitchen />
+    <ButtonAdmin /> 
+    </div>
+    </>
   )
 }
 
