@@ -1,4 +1,4 @@
-.containerButtons {
+/* .containerButtons {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -6,7 +6,7 @@
     background-color:#22A699 ;
     height: 350px;
     
-}
+} */
 
 .buttons {
     width: 228px;

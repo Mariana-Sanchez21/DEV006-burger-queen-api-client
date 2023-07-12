@@ -1,13 +1,13 @@
 import LogoBQ from '../assets/LogoBQ.png'
-import React from 'react';
+import 'tailwindcss/tailwind.css'
 import './logo.css'
 function Logo() {
     return(
-        <div className='logoContainer'>
-        <img src= {LogoBQ} alt="logo" className='logo' /> 
+        <div className="flex bg-black justify-center w-full ">
+        <img src= {LogoBQ} alt="logo" className="w-full md:w-auto lg:w-auto object-contain" /> 
         </div>
     
     )
 }
 
-export {Logo};
+export {Logo}; 
