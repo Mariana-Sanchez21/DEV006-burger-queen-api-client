@@ -7,7 +7,7 @@ export default {
   theme: {
     screens: {
       sm: '375px',
-      md: '820px',
+      md: '768px',
       lg: '1024px',
       xl: '1280px',
     },
@@ -15,10 +15,13 @@ export default {
       colors: {
         
           primary: '#22A699',
-          secondary: 'F2BE22',
+          secondary: '#F2BE22',
           tertiary: '#F29727',
           quaternary: '#F24C3D'
       
+      },
+      spacing: {
+        h: '34rem', 
       }
     },
   },
