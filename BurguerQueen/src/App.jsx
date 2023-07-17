@@ -6,6 +6,9 @@ import './App.css'
 // import 'tailwindcss/tailwind.css'
 import {Home} from './Components/Home/Home'
 import {Form} from './Components/Login/Form'
+import { WaiterView } from './Components/Waiter/WaiterView';
+import{AdminView} from './Components/Admin/AdminView';
+import{KitchenView} from './Components/Kitchen/KitchenView'
 import {
   BrowserRouter as Router,
   Routes,
@@ -21,7 +24,9 @@ function App() {
        
        <Routes>
         <Route path='/Login' Component={Form} /> 
-        
+        <Route path='/KitchenView' Component={KitchenView} />
+        <Route path='/WaiterView' Component={WaiterView} />
+         <Route path='/AdminView' Component={AdminView} />
         <Route path='/' Component={Home} />
        
        </Routes>

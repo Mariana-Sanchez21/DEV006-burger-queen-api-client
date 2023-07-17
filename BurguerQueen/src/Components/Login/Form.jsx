@@ -1,17 +1,20 @@
 import sanduche from '../../assets/sanduche_final.png'
-import axios from 'axios'
+import {requestGet} from '../../functions/request'
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 function Form(){
- const[email,setEmail] = useState('');
+ const[user,setUser] = useState('');
  const[password,setPassword]= useState('');
+ const[authData,setAuthData] = useState(null);
 
+ const navigate = useNavigate();
 
   const HandleSubmit= e =>{
     e.preventDefault()
   };
 
   const HandleChangeEmail = e =>{
-   setEmail(e.target.value)
+   setUser(e.target.value)
   
   }
  
@@ -21,24 +24,36 @@ function Form(){
     
   }
 
-   const HandleButton = async (user,password)=>{
-    try{
-      const response= await axios.post('http://localhost:8080/orders',{email,password})
-      const {data}=response;
-      const accessToken= data;
-      console.log(accessToken)
+  const HandleLogin = async (e) => {
+e.preventDefault();
+try {
+  const data = await requestGet(user,password);
+  setAuthData(data)
+  console.log(data)
+  const token = data.accessToken;
+  localStorage.setItem("token", JSON.stringify({ accessToken: token }));
+  const role = data.user.role;
+  localStorage.setItem("role", role)
 
-return {accessToken}
-    }catch(error){
-      console.error('Error en la solicitud:', error);
-      throw error;
-    }
-      
-      
-    }
-    
-    
-   
+  switch(role){
+    case 'admin':
+    navigate('/AdminView')
+      break;
+    case 'waiter':
+      navigate('/WaiterView') 
+      break;
+    case 'kitchen':
+      navigate('/KitchenView')
+      break;
+      default:
+        console.log('default case')
+        break;
+  }
+}catch (error) {
+  console.log('Error:', error);
+}
+
+  }
 
     return (
         <div>
@@ -54,10 +69,10 @@ return {accessToken}
          </div>
        <input type="password" name="contraseña" id="password" onChange={HandleChangePassword} />
 
-       <button type="submit" onClick={HandleButton}> INGRESAR</button><br/>
-
+       <button type="submit" onClick={HandleLogin}> INGRESAR</button><br/>
   </form>
     </div>
+   
     )
 }
 
