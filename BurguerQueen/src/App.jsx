@@ -20,8 +20,7 @@ function App() {
 
   return (
     <Router>
-      <div className='Contenedor'>
-       
+    <>
        <Routes>
         <Route path='/Login' Component={Form} /> 
         <Route path='/KitchenView' Component={KitchenView} />
@@ -30,7 +29,7 @@ function App() {
         <Route path='/' Component={Home} />
        
        </Routes>
-      </div>
+       </>
     </Router>
   )
 } 

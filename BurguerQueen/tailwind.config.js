@@ -21,7 +21,12 @@ export default {
       
       },
       spacing: {
-        h: '34rem', 
+        h: '34rem',
+        hForm:'50rem',
+        mlForm:'40rem',
+        mrForm:'-21rem',
+        mtboton:'30rem'
+       
       }
     },
   },
