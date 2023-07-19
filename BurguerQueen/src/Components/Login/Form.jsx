@@ -74,15 +74,15 @@ try {
        </div>
       <div className='bg-tertiary sm:h-3/4 sm:w-3/4  md:h-hForm md:w-h  lg:h-5/6 lg:w-2/4 rounded-3xl z-20 '>
       <form className='flex items-center flex-col h-full' onSubmit={HandleSubmit}>
-        <p className='font-inter  sm:text-lg text-center md:text-4xl font-bold sm:mt-10 lg:-mt-1  lg:py-10'>Ingresa con tus credenciales</p>
+        <p className='font-retro1  sm:text-lg text-center md:text-4xl font-bold sm:mt-10 lg:-mt-1  lg:py-10'>Ingresa con tus credenciales</p>
         <div className='flex md:mt-24 sm:mt-6 sm:-ml-6 lg:-mt-1 lg:mb-6' > 
-        <img  className='  sm:w-9 sm:h-9 md:w-20 md:h-16 lg:-ml-20 ' src={sanduche} alt="sanduche"/>
-        <label className='font-inter sm:text-lg md:text-4xl font-bold ' htmlFor="email">Correo Electrónico</label>
+        <img  className='  sm:w-9 sm:h-9 md:w-20 md:h-20 lg:-ml-20 ' src={sanduche} alt="sanduche"/>
+        <label className='font-retro2 sm:text-lg md:text-4xl font-bold ' htmlFor="email">Correo Electrónico</label>
         </div>
        <input  className=' sm:h-12  md:h-20 md:w-96 lg:w-h  lg:h-16' type="text" name="email" id="email" onChange={HandleChangeEmail} /> <br />
          <div className='flex md:mt-24 sm:mt-6 lg:-mt-1 lg:py-6 '> 
-         <img  className='  sm:w-9 sm:h-9 sm:-ml-20 md:h-16 md:w-20  md:-ml-32 lg:-ml-52' src={sanduche} alt="sanduche" />
-         <label className='font-inter  sm:text-lg md:text-4xl font-bold' htmlFor='password'>Contraseña</label>
+         <img  className='sm:w-10 sm:h-10 sm:-ml-20 md:h-20 md:w-20  md:-ml-32 lg:-ml-52' src={sanduche} alt="sanduche" />
+         <label className='font-retro2 sm:text-lg md:text-4xl font-bold' htmlFor='password'>Contraseña</label>
          </div>
        <input className='sm:h-12 md:h-20 md:w-96 lg:w-h lg:h-16 ' type="password" name="contraseña" id="password" onChange={HandleChangePassword} /> 
     
