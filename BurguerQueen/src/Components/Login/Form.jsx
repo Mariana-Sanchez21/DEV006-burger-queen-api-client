@@ -1,7 +1,7 @@
 import sanduche from '../../assets/sanduche_final.png'
 import viniloFinal from '../../assets/vinilo_final_720.png'
 import inicio from '../../assets/inicio.png'
-import {requestGet} from '../../functions/request'
+import {requestGet, requestProduct} from '../../functions/request'
 import {useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -35,16 +35,19 @@ try {
   setAuthData(data)
   console.log(data)
   const token = data.accessToken;
-  localStorage.setItem("token", JSON.stringify({ accessToken: token }));
+  localStorage.setItem("token", token);
   const role = data.user.role;
   localStorage.setItem("role", role)
+
+  const dataProducts=await requestProduct();
+  console.log(dataProducts)
 
   switch(role){
     case 'admin':
     navigate('/AdminView')
       break;
     case 'waiter':
-      navigate('/WaiterView') 
+      navigate('/WaiterViewBreakfast') 
       break;
     case 'kitchen':
       navigate('/KitchenView')
@@ -76,18 +79,18 @@ try {
       <form className='flex items-center flex-col h-full' onSubmit={HandleSubmit}>
         <p className='font-retro1  sm:text-lg text-center md:text-4xl font-bold sm:mt-10 lg:-mt-1  lg:py-10'>Ingresa con tus credenciales</p>
         <div className='flex md:mt-24 sm:mt-6 sm:-ml-6 lg:-mt-1 lg:mb-6' > 
-        <img  className='  sm:w-9 sm:h-9 md:w-20 md:h-20 lg:-ml-20 ' src={sanduche} alt="sanduche"/>
+        <img  className='  sm:w-9 sm:h-9 md:w-20 md:h-20 lg:w-20 lg:h-16 lg:-ml-20 ' src={sanduche} alt="sanduche"/>
         <label className='font-retro2 sm:text-lg md:text-4xl font-bold ' htmlFor="email">Correo Electrónico</label>
         </div>
-       <input  className=' sm:h-12  md:h-20 md:w-96 lg:w-h  lg:h-16' type="text" name="email" id="email" onChange={HandleChangeEmail} /> <br />
+       <input  className=' sm:h-12  md:h-20 md:w-96 lg:w-h  lg:h-16 border-4 rounded-lg px-4 py-4 focus:shadow-outline outline-none  focus:border-primary ' type="text" name="email" id="email" onChange={HandleChangeEmail} /> <br />
          <div className='flex md:mt-24 sm:mt-6 lg:-mt-1 lg:py-6 '> 
-         <img  className='sm:w-10 sm:h-10 sm:-ml-20 md:h-20 md:w-20  md:-ml-32 lg:-ml-52' src={sanduche} alt="sanduche" />
+         <img  className='sm:w-10 sm:h-10 sm:-ml-20 md:h-20 md:w-20 lg:w-24 lg:h-16 md:-ml-32 lg:-ml-52' src={sanduche} alt="sanduche" />
          <label className='font-retro2 sm:text-lg md:text-4xl font-bold' htmlFor='password'>Contraseña</label>
          </div>
-       <input className='sm:h-12 md:h-20 md:w-96 lg:w-h lg:h-16 ' type="password" name="contraseña" id="password" onChange={HandleChangePassword} /> 
+       <input className='sm:h-12 md:h-20 md:w-96 lg:w-h lg:h-16  border-4 rounded-lg px-4 py-4 focus:shadow-outline outline-none  focus:border-primary ' type="password" name="contraseña" id="password" onChange={HandleChangePassword} /> 
     
         {errorMessage && <p className=' bg-slate-100 text-red-600   font-black lg:text-3xl  md:text-3xl sm:mt-4 lg:mt-6 md:mt-4 p-1'>* {errorMessage}</p>}
-       <button className=' bg-secondary  rounded-full sm:w-44 sm:h-12 md:w-60 md:h-20 lg:h-20 lg:w-60 md:text-4xl lg:text-2xl sm:text-xl font-bold sm:mt-20 md:mt-20 lg:mt-18 font-inter' type="submit" onClick={HandleLogin}> INGRESAR</button><br/>
+       <button className=' bg-secondary  rounded-full sm:w-44 sm:h-12 md:w-60 md:h-20 lg:h-20 lg:w-60 md:text-4xl lg:text-2xl sm:text-xl font-bold sm:mt-20 md:mt-20 lg:mt-18 font-retro2  hover:shadow-xl  hover:scale-110  hover:shadow-black hover:transition-transform hover:duration-600 hover:ease-out shadow' type="submit" onClick={HandleLogin}> INGRESAR</button><br/>
   </form>
     </div>
 
