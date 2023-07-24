@@ -1,5 +1,5 @@
 
-function WaiterView(){
+function WaiterViewLunch(){
     return (
  <div>
     <p> Vista Mesera</p>
@@ -8,4 +8,4 @@ function WaiterView(){
     )
 }
 
-export{WaiterView}
+export{WaiterViewLunch}
