@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { requestProduct } from '../../functions/request';
 
-function ProductList({showBreakfast,addToSelectedProducts, removeFromSelectedProducts}){
+function ProductList({showBreakfast,addToSelectedProducts, decreaseFromSelectedProducts}){
     const [productsData, setProductsData] = useState([]);
     
     useEffect(()=>{
@@ -31,7 +31,7 @@ function ProductList({showBreakfast,addToSelectedProducts, removeFromSelectedPro
             <p>$ {product.price}</p>
             <button onClick={()=> {addToSelectedProducts(product)}}>+</button>
             <span>{product.quantity}</span>
-            <button onClick={()=> {removeFromSelectedProducts(product)}}>-</button>
+            <button onClick={()=> {decreaseFromSelectedProducts(product)}}>-</button>
             
         </div>
         
