@@ -25,10 +25,10 @@ function ProductList({showBreakfast,addToSelectedProducts, decreaseFromSelectedP
         }
         return filteredProducts.map(product => (
         
-            <div key={product.id}>
-            <img src={product.image} alt={product.name}  className='lg:w-36  lg:h-36'/>
-            <p>{product.name}</p>
-            <p>$ {product.price}</p>
+            <div className='lg:p-5' key={product.id}>
+            <img src={product.image} alt={product.name}  className=' lg:w-44   lg:h-44 border-2 border-secondary rounded-sm shadow-lg lg:p-2 '/>
+            <p className='lg:text-3xl'>{product.name}</p>
+            <p className='lg:text-3xl'>$ {product.price}</p>
             <button onClick={()=> {addToSelectedProducts(product)}}>+</button>
             <span>{product.quantity}</span>
             <button onClick={()=> {decreaseFromSelectedProducts(product)}}>-</button>
@@ -39,7 +39,7 @@ function ProductList({showBreakfast,addToSelectedProducts, decreaseFromSelectedP
     }
    
     return (
-        <div>
+        <div className='lg:grid lg:grid-cols-2 lg:gap-4l lg:mt-10'>
             {renderProductList()}
         </div>
         
