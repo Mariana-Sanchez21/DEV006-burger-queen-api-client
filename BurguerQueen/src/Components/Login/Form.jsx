@@ -33,7 +33,6 @@ e.preventDefault();
 try {
   const data = await requestGet(user,password);
   setAuthData(data)
-  console.log(data)
   const token = data.accessToken;
   localStorage.setItem("token", token);
   const role = data.user.role;
@@ -94,7 +93,7 @@ try {
   </form>
     </div>
 
-    </section>
+    </section> 
         
     </>
    
