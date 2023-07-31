@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { requestProduct } from '../../functions/request';
+import signoMas from '../../assets/simboloMas.png'
+import signoMenos from '../../assets/simboloMenos.png'
 
 function ProductList({showBreakfast,addToSelectedProducts, decreaseFromSelectedProducts}){
     const [productsData, setProductsData] = useState([]);
@@ -26,12 +28,19 @@ function ProductList({showBreakfast,addToSelectedProducts, decreaseFromSelectedP
         return filteredProducts.map(product => (
         
             <div className='lg:p-5' key={product.id}>
-            <img src={product.image} alt={product.name}  className=' lg:w-44   lg:h-44 border-2 border-secondary rounded-sm shadow-lg lg:p-2 '/>
-            <p className='lg:text-3xl'>{product.name}</p>
-            <p className='lg:text-3xl'>$ {product.price}</p>
-            <button onClick={()=> {addToSelectedProducts(product)}}>+</button>
+            <img src={product.image} alt={product.name}  className=' lg:w-44   lg:h-44 border-4 border-secondary rounded-sm shadow-lg lg:p-2 '/>
+           <div className='flex lg:mt-5'> 
+            <p className='lg:text-3xl font-retro2 lg:mr-6'>{product.name}</p>
+            <p className='lg:text-3xl font-retro2'>$ {product.price}</p>
+            </div>
+            <button onClick={()=> {addToSelectedProducts(product)}}>
+                <img className='lg:w-6 lg:h-5 lg:mr-12 lg:ml-8 lg:mt-5 hover:scale-125' src={signoMas} alt="mas" />
+            </button>
             <span>{product.quantity}</span>
-            <button onClick={()=> {decreaseFromSelectedProducts(product)}}>-</button>
+            <button onClick={()=> {decreaseFromSelectedProducts(product)}}>
+                <img className='lg:w-5 lg:h-2 lg:mb-1 hover:scale-125' src={signoMenos} alt="menos" />
+
+            </button>
             
         </div>
         
