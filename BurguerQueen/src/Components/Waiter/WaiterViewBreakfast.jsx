@@ -1,4 +1,5 @@
 import LogoBQ from '../../assets/LogoBQ.png'
+import papelera from '../../assets/papelera.png'
 import { ProductList } from './ProductList'
 import { useState } from 'react'
 import { Modal } from '../Modal/Modal';
@@ -62,64 +63,76 @@ const handleOpenModal= () => {
 
     return (
    <section className=' bg-black text-white '>
- <nav className=' bg-primary lg:h-28 flex justify-between text-black sm:w-full sm:h-20 font-bold'>
- <div className=' lg:h-24 lg:w-28 sm:h-16 sm:w-20 fixed'>
+ <nav className=' bg-primary lg:h-28 flex justify-between text-black sm:w-full sm:h-20 font-bold '>
+ <div className=' lg:h-24 lg:w-28 sm:h-16 sm:w-20 '>
    <img src={LogoBQ} alt="logo" />
  </div>
- <ul className=' flex lg:justify-between lg:h-16 mt-8 lg:w-h  lg:ml-96  sm:h-9 sm:w-80 sm:ml-24 sm:justify-around'> 
-   <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl'>Ordenes Listas</li>
-   <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl'>Historial de Ordenes</li>
+ <ul className=' flex lg:h-16 mt-8 lg:w-hForm mr-36 sm:h-9 sm:w-80 sm:ml-24 sm:justify-around bg-blue '> 
+   <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl font-retro2 lg:mr-20'>Ordenes Listas</li>
+   <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl font-retro2 lg:mr-20'>Historial de Ordenes</li>
  </ul>
- </nav>
+ </nav> 
  <div className='Buttons border-black flex lg:justify-around lg:mt-6'>
-   <button onClick={handleOpenModal} className='lg:mr-96 font-bold border-2 border-secondary rounded-sm shadow-lg lg:p-2 lg:text-3xl'>Nueva Orden</button>
+   <button onClick={handleOpenModal} className='lg:mr-96 font-bold border-4 border-secondary rounded-sm shadow-lg hover:scale-125 lg:p-2 lg:text-xl font-retro1'>Nueva Orden</button>
    {openModal && (
     <Modal>
       <ClientForm setOpenModal={setOpenModal}/>
     </Modal>
    )}
-    <button onClick={HandleShowBreakfast} className='border-2 border-tertiary rounded-sm shadow-lg lg:-mr-20 lg:p-2 font-bold lg:text-3xl'>Desayuno</button>
-    <button onClick={HandleShowLunch} className=' lg:mr-20 font-bold border-2 border-secondary rounded-sm shadow-lg lg:p-2 lg:text-3xl'>Almuerzo</button>
+    <button onClick={HandleShowBreakfast} className='border-4 border-tertiary rounded-sm shadow-lg lg:-mr-20 lg:p-2 font-bold lg:text-xl font-retro1 hover:scale-125'>Desayuno</button>
+    <button onClick={HandleShowLunch} className=' lg:mr-20 font-bold border-4 border-secondary rounded-sm shadow-lg lg:p-2 lg:text-xl font-retro1 hover:scale-125'>Almuerzo</button>
  </div>
-<article className=' lg:w-3/5 '>
+ <section className='flex justify-between'> 
+ <article className=' lg:w-3/5 '>
 <ProductList showBreakfast={showBreakfast} addToSelectedProducts={addToSelectedProducts}  decreaseFromSelectedProducts={decreaseFromSelectedProducts} removeFromSelectedProducts={removeFromSelectedProducts}/>
 </article>
-<article className='flex'>
-  <div className='lg:w-1/4'>
-    <p>Resumen de la Orden</p>
+<article className=' bg-primary h-auto  lg:w-h lg:mt-14 lg:mr-16 '>
+  <div className='lg:w-1/4 '>
+    <p className='font-retro1 lg:text-2xl whitespace-nowrap lg:ml-5 lg:mb-12 lg:mt-10 '>Resumen de la Orden</p>
+    <div id='datosCliente'>
+      <p className=' whitespace-nowrap'>Nombre del cliente:</p>
+      <p className=' whitespace-nowrap'>Número de mesa:</p> <br />
+    </div>
     <table>
       <thead>
         <tr>
-          <th>Imagen</th>
-          <th>Producto</th>
-          <th>Cantidad</th>
-          <th>Precio</th>
+          <th className='lg:pl-9 lg:mt-12 font-retro2 lg:text-xl'>Imagen</th>
+          <th className='lg:pl-9 lg:mt-12 font-retro2 lg:text-xl'>Producto</th>
+          <th className='lg:pl-9 lg:mt-12 font-retro2 lg:text-xl'>Cantidad</th>
+          <th className='lg:pl-9 lg:mt-12 font-retro2 lg:text-xl'> Precio</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className=' w-auto'>
        {selectedProducts.map((product, index)=>{
         return (
         <tr key={index}>
-          <td>
-            <img src={product.image} alt={product.name} className=' border-secondary rounded-sm shadow-lg lg:p-2 lg:w-36 lg:h-36 border-2'/>
+          <td className='lg:pl-9'>
+            <img src={product.image} alt={product.name} className=' lg:p-2 lg:w-96 lg:h-20 lg:mt-5'/>
           </td>
-          <td>{product.name}</td>
-          <td>
+          <td className='lg:pl-12 font-retro2 lg:text-lg'>{product.name}</td>
+          <td className='lg:pl-16 font-retro2 lg:text-lg'>
             {product.quantity}
           </td>
-          <td>${product.price * product.quantity}</td>
+          <td className='lg:pl-14 font-retro2 lg:text-lg'>${product.price * product.quantity}</td>  
           <td>
-          <button onClick={()=> {removeFromSelectedProducts(product)}}>X</button>
+            <div className='bg-blue w-16 h-16'>
+          <button onClick={()=> {removeFromSelectedProducts(product)}}>
+            <img src={papelera} alt="papelera" className='   w-9 h-8 mt-3' />
+          </button>
+          </div>
           </td>
 
         </tr>
         );
-       })};
+       })}
       </tbody>
     </table>
   </div>
-  <p>Total: ${calculateTotal()}</p>
+  <p className='font-retro2 lg:text-2xl lg:mt-12 lg:ml-9'>Total: ${calculateTotal()}</p>
 </article>
+
+ </section>
+
    </section>
 
     )

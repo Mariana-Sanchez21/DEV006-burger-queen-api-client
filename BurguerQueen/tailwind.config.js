@@ -22,7 +22,9 @@ export default {
           primary: '#22A699',
           secondary: '#F2BE22',
           tertiary: '#F29727',
-          quaternary: '#F24C3D'
+          quaternary: '#F24C3D',
+          btn1: '#4ABC78',
+          btn2: '#D64550'
       
       },
       spacing: {
@@ -32,7 +34,11 @@ export default {
         mrForm:'-21rem',
         mtboton:'30rem'
        
-      }
+      },
+
+      blur: {
+     blur: "2px",
+      },
     },
   },
   plugins: [],
