@@ -11,6 +11,8 @@ function WaiterViewBreakfast(){
   const[showBreakfast, setShowBreakfast] = useState(true);
   const[selectedProducts, setSelectedProducts] = useState([]);
   const[openModal, setOpenModal] = useState(false);
+  const [clientInfo, setClientInfo] = useState('');
+  const [clientTable, setClientTable] = useState('');
   
   
   const HandleShowBreakfast = () => {
@@ -25,6 +27,20 @@ function WaiterViewBreakfast(){
     return selectedProducts.reduce((total, product) => total + product.price * product.quantity, 0);
   };
 
+  const onClientInformation=(name,table)=>{
+    setClientInfo(name)
+    setClientTable(table)
+  }
+
+  const clearOrder = () => {
+    setSelectedProducts([]);
+   
+  };
+
+  const clearClientInfo=()=>{
+    setClientInfo('');
+    setClientTable('');
+  };
 
   const addToSelectedProducts = (product)=> {
     const updatedProducts = [...selectedProducts];
@@ -63,7 +79,7 @@ const handleOpenModal= () => {
 
     return (
    <section className=' bg-black text-white '>
- <nav className=' bg-primary lg:h-28 flex justify-between text-black sm:w-full sm:h-20 font-bold '>
+ <nav className=' bg-primary lg:h-28 flex justify-between text-black sm:w-full sm:h-20 font-bold'>
  <div className=' lg:h-24 lg:w-28 sm:h-16 sm:w-20 '>
    <img src={LogoBQ} alt="logo" />
  </div>
@@ -76,10 +92,10 @@ const handleOpenModal= () => {
    <button onClick={handleOpenModal} className='lg:mr-96 font-bold border-4 border-secondary rounded-sm shadow-lg hover:scale-125 lg:p-2 lg:text-xl font-retro1'>Nueva Orden</button>
    {openModal && (
     <Modal>
-      <ClientForm setOpenModal={setOpenModal}/>
+      <ClientForm setOpenModal={setOpenModal}  onClientInformation={onClientInformation}/>
     </Modal>
    )}
-    <button onClick={HandleShowBreakfast} className='border-4 border-tertiary rounded-sm shadow-lg lg:-mr-20 lg:p-2 font-bold lg:text-xl font-retro1 hover:scale-125'>Desayuno</button>
+     <button onClick={HandleShowBreakfast} className='border-4 border-tertiary rounded-sm shadow-lg lg:-mr-20 lg:p-2 font-bold lg:text-xl font-retro1 hover:scale-125'>Desayuno</button>
     <button onClick={HandleShowLunch} className=' lg:mr-20 font-bold border-4 border-secondary rounded-sm shadow-lg lg:p-2 lg:text-xl font-retro1 hover:scale-125'>Almuerzo</button>
  </div>
  <section className='flex justify-between'> 
@@ -89,12 +105,17 @@ const handleOpenModal= () => {
 <article className=' bg-primary h-auto  lg:w-h lg:mt-14 lg:mr-16 '>
   <div className='lg:w-1/4 '>
     <p className='font-retro1 lg:text-2xl whitespace-nowrap lg:ml-5 lg:mb-12 lg:mt-10 '>Resumen de la Orden</p>
-    <div id='datosCliente'>
-      <p className=' whitespace-nowrap'>Nombre del cliente:</p>
-      <p className=' whitespace-nowrap'>Número de mesa:</p> <br />
+    <div id='datosCliente flex'>
+      <div>
+      <p className=' whitespace-nowrap lg:text-xl lg:font-bold font-retro2 lg:ml-2' >Nombre del cliente: {clientInfo}</p>
+      <p className=' whitespace-nowrap lg:text-xl lg:font-bold font-retro2 lg:ml-2'>Número de mesa: {clientTable}</p> 
+      </div>
+      <div className='lg:ml-96 lg:-mt-12 lg:mb-12'>
+      <button className=" font-extrabold text-2xl bg-btn2 w-9" onClick={clearClientInfo} type="button">X</button>
+      </div>
     </div>
     <table>
-      <thead>
+      <thead> 
         <tr>
           <th className='lg:pl-9 lg:mt-12 font-retro2 lg:text-xl'>Imagen</th>
           <th className='lg:pl-9 lg:mt-12 font-retro2 lg:text-xl'>Producto</th>
@@ -129,6 +150,10 @@ const handleOpenModal= () => {
     </table>
   </div>
   <p className='font-retro2 lg:text-2xl lg:mt-12 lg:ml-9'>Total: ${calculateTotal()}</p>
+  <div className='flex justify-between lg:w-96 lg: ml-20 lg:mt-10 lg:mb-5'>
+<button className=" border-4 border-black rounded-md lg:w-44 lg:h-20 text-2xl  font-extrabold bg-btn1 hover:scale-125" type="submit">Mandar a cocina</button>
+      <button className=" border-4 border-black rounded-md lg:w-44 lg:h-20 text-2xl  font-extrabold bg-btn2 hover:scale-125" type="button" onClick={clearOrder} >Cancelar Orden</button>
+</div>
 </article>
 
  </section>

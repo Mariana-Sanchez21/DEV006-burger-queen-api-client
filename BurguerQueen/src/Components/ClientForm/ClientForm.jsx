@@ -1,10 +1,18 @@
 
-function ClientForm({setOpenModal}) {
+
+function ClientForm({setOpenModal, onClientInformation}) {
+
    
      const OnSubmit = (e) => {
         e.preventDefault();
         setOpenModal(false)
+        const name = e.target.nombreCliente.value;
+        const table = e.target.numeroMesa.value;
+        onClientInformation(name,table)
+         
     }
+
+
     const onCancel = () => {
         setOpenModal(false)
     }
@@ -14,7 +22,7 @@ function ClientForm({setOpenModal}) {
         <button className="absolute top-0 right-0 p-1 font-extrabold text-2xl bg-btn2 w-9"  type="button" onClick={onCancel}>X</button>
         <form className="flex flex-col" onSubmit={OnSubmit}>
        <label className="font-retro2 color-black text-center text-3xl font-extrabold mt-10" htmlFor="">Nombre del cliente:</label>
-      <input className="lg:w-4/6 lg:h-14 lg:ml-32 lg:mt-4 text-center font-retro2 text-lg" type="text" id="nombreCliente" />
+      <input className="lg:w-4/6 lg:h-14 lg:ml-32 lg:mt-4 text-center font-retro2 text-lg" type="text" id="nombreCliente"  />
       <label className="font-retro2 color-black text-center text-3xl font-extrabold mt-10" htmlFor="">Número de mesa</label>
       <input className="lg:w-4/6 lg:h-14 lg:ml-32 lg:mt-4 text-center font-retro2 text-lg"  type="number" min={1} name="" id="numeroMesa" />
        <div className="Flex ">
