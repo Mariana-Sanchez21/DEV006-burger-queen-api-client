@@ -39,7 +39,7 @@ function ProductList({showBreakfast,addToSelectedProducts, decreaseFromSelectedP
     }
    
     return (
-        <div className='lg:grid lg:grid-cols-2 lg:gap-4l lg:mt-10'>
+        <div className='lg:grid lg:grid-cols-2 lg:gap-20 lg:mt-10'>
             {renderProductList()}
         </div>
         

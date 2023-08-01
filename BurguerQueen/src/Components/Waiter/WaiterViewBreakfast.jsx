@@ -68,7 +68,7 @@ const handleOpenModal= () => {
  </div>
  <ul className=' flex lg:justify-between lg:h-16 mt-8 lg:w-h  lg:ml-96  sm:h-9 sm:w-80 sm:ml-24 sm:justify-around'> 
    <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl'>Ordenes Listas</li>
-   <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl'>Historial de Ordenes</li>
+   <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-xl'>Historial de Ordenes</li>
  </ul>
  </nav>
  <div className='Buttons border-black flex lg:justify-around lg:mt-6'>
