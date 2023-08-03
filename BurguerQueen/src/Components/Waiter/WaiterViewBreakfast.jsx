@@ -31,7 +31,7 @@ function WaiterViewBreakfast(){
     setClientInfo(name)
     setClientTable(table)
   }
-
+ 
   const clearOrder = () => {
     setSelectedProducts([]);
    
@@ -83,34 +83,34 @@ const handleOpenModal= () => {
  <div className='  lg:h-24 lg:w-28 sm:h-32  sm:w-44   '>
    <img className='' src={LogoBQ} alt="logo" />
  </div>
- <ul className=' flex lg:h-16 mt-8 lg:w-hForm mr-36 sm:h-9 sm:w-80 sm:mt-2  bg-blue '> 
-   <li className=' lg:mb-20  border-red-600 lg:text-3xl font-retro2 lg:mr-20 sm:mb-24 sm:pr-6 md:text-lg md:-ml-36'>Ordenes Listas</li>
-   <li className='  lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl font-retro2 lg:mr-20 md:text-lg'>Historial de Ordenes</li>
+
+ <ul className=' flex lg:h-16 mt-8 lg:w-hForm mr-36 sm:h-9 sm:w-80 sm:ml-24 sm:justify-around bg-blue '> 
+   <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl font-retro2 lg:mr-20 md:text-lg md:-ml-36'>Ordenes Listas</li>
+   <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl font-retro2 lg:mr-20 md:text-lg'>Historial de Ordenes</li>
  </ul>
  </nav> 
- <div className='Buttons border-black flex lg:justify-around sm:justify-around lg:mt-6 sm:mt-5 md:mt-10 md:justify-between'>
-   <button onClick={handleOpenModal} className='lg:mr-96 font-bold border-4 border-secondary rounded-sm shadow-lg hover:scale-125 lg:p-2 lg:text-xl lg:w-48 lg:h-24  font-retro1 sm:text-3xs sm:w-24 sm:h-12 md:ml-3'>Nueva Orden</button> 
+ <div className='Buttons border-black flex lg:justify-around lg:mt-6 md:mt-10 md:justify-between'>
+   <button onClick={handleOpenModal} className='lg:mr-96 font-bold border-4 border-secondary rounded-sm shadow-lg hover:scale-125 lg:p-2 lg:text-xl font-retro1 md:ml-3'>Nueva Orden</button>
    {openModal && (
     <Modal>
       <ClientForm setOpenModal={setOpenModal}  onClientInformation={onClientInformation}/>
     </Modal>
    )}
-    <br/>
-     <button onClick={HandleShowBreakfast} className='border-4 border-tertiary rounded-sm shadow-lg lg:-mr-20 lg:p-2 font-bold lg:text-xl font-retro1 hover:scale-125 lg:w-64 lg:h-16 sm:text-3xs sm:w-24 sm:h-12'>Desayuno</button>
-    
-    <button onClick={HandleShowLunch} className=' lg:mr-20 font-bold border-4 border-secondary rounded-sm shadow-lg lg:p-2 lg:text-xl  lg:w-64 lg:h-16 font-retro1 hover:scale-125 sm:text-3xs sm:w-24 sm:h-12 md:mr-36'>Almuerzo</button>
+     <button onClick={HandleShowBreakfast} className='border-4 border-tertiary rounded-sm shadow-lg lg:-mr-20 lg:p-2 font-bold lg:text-xl font-retro1 hover:scale-125'>Desayuno</button>
+    <button onClick={HandleShowLunch} className=' lg:mr-20 font-bold border-4 border-secondary rounded-sm shadow-lg lg:p-2 lg:text-xl font-retro1 hover:scale-125 md:mr-36'>Almuerzo</button>
  </div>
- <section className='flex lg:flex-row sm:flex-col sm:justify-between'> 
- <article className=' lg:w-3/5 sm:grid   sm:mt- md:mt-6 md:ml-7'>
+ <section className='flex justify-between'> 
+ <article className=' lg:w-3/5 md:mt-6 md:ml-7'>
 <ProductList showBreakfast={showBreakfast} addToSelectedProducts={addToSelectedProducts}  decreaseFromSelectedProducts={decreaseFromSelectedProducts} removeFromSelectedProducts={removeFromSelectedProducts}/>
 </article>
-<article className=' bg-primary h-auto  lg:w-h lg:mt-14 lg:mr-16 md:mt-6 md:w-h '>
+<article className=' bg-primary h-auto lg:w-h lg:mt-14 lg:mr-16 md:mt-6 md:w-h'>
+
   <div className='lg:w-1/4 '>
     <p className='font-retro1 lg:text-2xl whitespace-nowrap lg:ml-5 lg:mb-12 lg:mt-10 md:mt-8 md:ml-5'>Resumen de la Orden</p>
     <div id='datosCliente flex'>
       <div>
-      <p className=' whitespace-nowrap lg:text-xl lg:font-bold font-retro2 lg:ml-2 sm:text-md md:text-xl' >Nombre del cliente: {clientInfo}</p>
-      <p className=' whitespace-nowrap lg:text-xl lg:font-bold font-retro2 lg:ml-2 sm:text-md md:text-xl'>Número de mesa: {clientTable}</p> 
+      <p className=' whitespace-nowrap lg:text-xl lg:font-bold font-retro2 lg:ml-2 md:text-xl' >Nombre del cliente: {clientInfo}</p>
+      <p className=' whitespace-nowrap lg:text-xl lg:font-bold font-retro2 lg:ml-2 md:text-xl'>Número de mesa: {clientTable}</p> 
       </div>
       <div className='lg:ml-96 lg:-mt-12 lg:mb-12'>
       <button className=" font-extrabold text-2xl  bg-btn2 w-9" onClick={clearClientInfo} type="button">X</button>
@@ -119,7 +119,7 @@ const handleOpenModal= () => {
     <table>
       <thead> 
         <tr>
-          <th className='lg:pl-9 lg:mt-12 font-retro2 lg:text-xl md:text-xl'>Imagen</th>
+          <th className='lg:pl-9 lg:mt-12 font-retro2 lg:text-xl md:text-xl '>Imagen</th>
           <th className='lg:pl-9 lg:mt-12 font-retro2 lg:text-xl md:text-xl md:pl-6'>Producto</th>
           <th className='lg:pl-9 lg:mt-12 font-retro2 lg:text-xl md:text-xl md:pl-6'>Cantidad</th>
           <th className='lg:pl-9 lg:mt-12 font-retro2 lg:text-xl md:text-xl md:pl-6'> Precio</th>
@@ -153,10 +153,11 @@ const handleOpenModal= () => {
   </div>
   <p className='font-retro2 lg:text-2xl lg:mt-12 lg:ml-9 md:mt-12 md:text-2xl'>Total: ${calculateTotal()}</p>
   <div className='flex justify-between lg:w-96 lg:ml-20 lg:mt-10 lg:mb-5 md:ml-2 md:mt-7'>
-<button className=" border-4 border-black rounded-md lg:w-44 lg:h-20 text-2xl  font-extrabold bg-btn1 hover:scale-125 md:text-xl md:w-32 md:h-16" type="submit">Mandar a cocina</button>
-      <button className=" border-4 border-black rounded-md lg:w-44 lg:h-20 text-2xl  font-extrabold bg-btn2 hover:scale-125 md:text-xl md:w-32 md:h-16 md:mr-32 lg:ml-10" type="button" onClick={clearOrder} >Cancelar Orden</button>
+      <button className=" border-4 border-black rounded-md lg:w-44 lg:h-20 text-2xl font-extrabold bg-btn1 hover:scale-125 md:text-xl md:w-32 md:h-16" type="submit">Mandar a cocina</button>
+      <button className=" border-4 border-black rounded-md lg:w-44 lg:h-20 text-2xl  font-extrabold lg:ml-12  bg-btn2 hover:scale-125 md:text-xl md:w-32 md:h-16 md:mr-32" type="button" onClick={clearOrder} >Cancelar Orden</button>
+
 </div>
-</article>
+</article> 
 
  </section>
 
