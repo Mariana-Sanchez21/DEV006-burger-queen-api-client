@@ -117,9 +117,10 @@ const handleOpenModal= () => {
     return (
    <section className=' bg-black text-white '>
  <nav className=' bg-primary lg:h-28 flex justify-between text-black sm:w-full sm:h-20 font-bold'>
- <div className=' lg:h-24 lg:w-28 sm:h-16 sm:w-20 '>
-   <img src={LogoBQ} alt="logo" />
+ <div className='  lg:h-24 lg:w-28 sm:h-32  sm:w-44   '>
+   <img className='' src={LogoBQ} alt="logo" />
  </div>
+
  <ul className=' flex lg:h-16 mt-8 lg:w-hForm mr-36 sm:h-9 sm:w-80 sm:ml-24 sm:justify-around bg-blue '> 
    <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl font-retro2 lg:mr-20 md:text-lg md:-ml-36'>Ordenes Listas</li>
    <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl font-retro2 lg:mr-20 md:text-lg'>Historial de Ordenes</li>

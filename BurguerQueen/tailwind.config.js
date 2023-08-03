@@ -35,6 +35,11 @@ export default {
         mtboton:'30rem'
        
       },
+      
+      fontSize: {
+        '2xs': '0.625rem', // Equivalente a 10px
+        '3xs': '0.5rem',   // Equivalente a 8px
+      },
 
       blur: {
      blur: "2px",

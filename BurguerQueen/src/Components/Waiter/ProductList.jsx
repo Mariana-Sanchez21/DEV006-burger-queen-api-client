@@ -26,7 +26,7 @@ function ProductList({showBreakfast,addToSelectedProducts, decreaseFromSelectedP
            
         }
         return filteredProducts.map(product => (
-        
+
             <div className='lg:p-5 ' key={product.id}>
             <img src={product.image} alt={product.name}  className=' lg:w-44 lg:h-44 border-4 border-secondary rounded-sm shadow-lg lg:p-2 md:w-36 md:h-32 '/>
            <div className='flex lg:mt-5'> 
@@ -39,7 +39,6 @@ function ProductList({showBreakfast,addToSelectedProducts, decreaseFromSelectedP
             <span>{product.quantity}</span>
             <button onClick={()=> {decreaseFromSelectedProducts(product)}}>
                 <img className='lg:w-5 lg:h-2 lg:mb-1 hover:scale-125 md:w-4 md:h-2 md:ml-8 md:mb-3' src={signoMenos} alt="menos" />
-
             </button>
             
         </div>
