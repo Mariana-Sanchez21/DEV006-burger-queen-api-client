@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Modal } from '../Modal/Modal';
 import { ClientForm } from '../ClientForm/ClientForm';
 
-
+//AQUI COMIENZAN LOS CAMBIOS
 
 function WaiterViewBreakfast(){
   const[showBreakfast, setShowBreakfast] = useState(true);
@@ -80,9 +80,10 @@ const handleOpenModal= () => {
     return (
    <section className=' bg-black text-white '>
  <nav className=' bg-primary lg:h-28 flex justify-between text-black sm:w-full sm:h-20 font-bold'>
- <div className=' lg:h-24 lg:w-28 sm:h-16 sm:w-20 '>
-   <img src={LogoBQ} alt="logo" />
+ <div className='  lg:h-24 lg:w-28 sm:h-32  sm:w-44   '>
+   <img className='' src={LogoBQ} alt="logo" />
  </div>
+
  <ul className=' flex lg:h-16 mt-8 lg:w-hForm mr-36 sm:h-9 sm:w-80 sm:ml-24 sm:justify-around bg-blue '> 
    <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl font-retro2 lg:mr-20 md:text-lg md:-ml-36'>Ordenes Listas</li>
    <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl font-retro2 lg:mr-20 md:text-lg'>Historial de Ordenes</li>
@@ -103,6 +104,7 @@ const handleOpenModal= () => {
 <ProductList showBreakfast={showBreakfast} addToSelectedProducts={addToSelectedProducts}  decreaseFromSelectedProducts={decreaseFromSelectedProducts} removeFromSelectedProducts={removeFromSelectedProducts}/>
 </article>
 <article className=' bg-primary h-auto lg:w-h lg:mt-14 lg:mr-16 md:mt-6 md:w-h'>
+
   <div className='lg:w-1/4 '>
     <p className='font-retro1 lg:text-2xl whitespace-nowrap lg:ml-5 lg:mb-12 lg:mt-10 md:mt-8 md:ml-5'>Resumen de la Orden</p>
     <div id='datosCliente flex'>
@@ -111,7 +113,7 @@ const handleOpenModal= () => {
       <p className=' whitespace-nowrap lg:text-xl lg:font-bold font-retro2 lg:ml-2 md:text-xl'>Número de mesa: {clientTable}</p> 
       </div>
       <div className='lg:ml-96 lg:-mt-12 lg:mb-12'>
-      <button className=" font-extrabold text-2xl bg-btn2 w-9" onClick={clearClientInfo} type="button">X</button>
+      <button className=" font-extrabold text-2xl  bg-btn2 w-9" onClick={clearClientInfo} type="button">X</button>
       </div>
     </div>
     <table>
@@ -153,6 +155,7 @@ const handleOpenModal= () => {
   <div className='flex justify-between lg:w-96 lg:ml-20 lg:mt-10 lg:mb-5 md:ml-2 md:mt-7'>
       <button className=" border-4 border-black rounded-md lg:w-44 lg:h-20 text-2xl font-extrabold bg-btn1 hover:scale-125 md:text-xl md:w-32 md:h-16" type="submit">Mandar a cocina</button>
       <button className=" border-4 border-black rounded-md lg:w-44 lg:h-20 text-2xl  font-extrabold lg:ml-12  bg-btn2 hover:scale-125 md:text-xl md:w-32 md:h-16 md:mr-32" type="button" onClick={clearOrder} >Cancelar Orden</button>
+
 </div>
 </article> 
 

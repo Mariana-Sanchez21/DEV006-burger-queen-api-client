@@ -28,6 +28,7 @@ function ClientForm({setOpenModal, onClientInformation}) {
        <div className="Flex md:mt-5 ">
         <button className=" border-4 border-black rounded-md lg:w-40 lg:h-12 text-2xl lg:mt-24 lg:ml-40 font-extrabold bg-btn1 hover:scale-125 md:w-44 md:h-14 md:ml-14" type="submit">Crear Orden</button>
         <button className=" border-4 border-black rounded-md lg:w-40 lg:h-12 text-2xl lg:mt-24 font-extrabold lg:ml-40 bg-btn2 hover:scale-125 md:w-44 md:h-14 md:ml-20" type="button" onClick={onCancel} >Cancelar</button>
+
         </div>
         </form>
         </div>
