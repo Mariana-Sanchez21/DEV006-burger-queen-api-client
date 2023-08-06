@@ -3,7 +3,7 @@ import viniloFinal from '../../assets/vinilo_final_720.png'
 import inicio from '../../assets/inicio.png'
 import {requestGet, requestProduct} from '../../functions/request'
 import {useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 function Form(){
  const[user,setUser] = useState('');
@@ -38,9 +38,8 @@ try {
   const role = data.user.role;
   localStorage.setItem("role", role)
 
-  const dataProducts=await requestProduct();
-  console.log(dataProducts)
-
+  const dataProducts = await requestProduct();
+  
   switch(role){
     case 'admin':
     navigate('/AdminView')
