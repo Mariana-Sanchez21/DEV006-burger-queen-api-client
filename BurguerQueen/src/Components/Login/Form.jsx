@@ -35,6 +35,7 @@ try {
   setAuthData(data)
   const token = data.accessToken;
   localStorage.setItem("token", token);
+  console.log(token)
   const role = data.user.role;
   localStorage.setItem("role", role)
 

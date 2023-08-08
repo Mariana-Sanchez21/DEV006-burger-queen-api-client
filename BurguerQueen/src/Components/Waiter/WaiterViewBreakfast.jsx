@@ -80,7 +80,10 @@ const onSubmitOrder = async (e) => {
         clientName: clientInfo,
         tableNumber: clientTable,
         products: selectedProducts,
+        
       };
+      const response = await requestPostOrder(orderData, clientTable, selectedProducts, token);
+      console.log('Response from server:', response);
       const orderDataString = JSON.stringify(orderData);
       localStorage.setItem('orderData', orderDataString);
 

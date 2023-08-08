@@ -8,7 +8,7 @@ function Home(){
     return(
         <>
         <Logo />
-        <div className=" sm:h-80  md:w-full md:h-h lg:h-96 flex flex-col justify-evenly items-center bg-primary ">
+        <div title='contenedor botones' className=" sm:h-80  md:w-full md:h-h lg:h-96 flex flex-col justify-evenly items-center bg-primary ">
           <ButtonWaiter />
            <ButtonKitchen />
          <ButtonAdmin /> 
