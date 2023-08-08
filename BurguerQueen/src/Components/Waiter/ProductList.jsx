@@ -9,9 +9,14 @@ function ProductList({showBreakfast,addToSelectedProducts, decreaseFromSelectedP
     
     useEffect(()=>{
         async function fetchData() {
-            const productsList = await requestProduct();
+            try{
+                const productsList = await requestProduct();
 
-            setProductsData(productsList);
+                setProductsData(productsList);
+            } catch(error){
+                console.log('Error al obtener los datos', error)
+            }
+            
         }
         fetchData();
     }, []);

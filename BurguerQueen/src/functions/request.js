@@ -35,7 +35,7 @@ async function requestGet(user,password){
     let response = await axios.get('http://localhost:8080/products',{
       headers:{
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}` ,
+         "Authorization": `Bearer ${token}` ,
       }, 
       
     })
@@ -46,10 +46,11 @@ async function requestGet(user,password){
    }catch(error) {
     if(error.response){
       const status = error.response.status;
-      if (status === 400) {
+      if (status >=400 && status<=500) {
         throw new Error(error.response.data);
       } 
     }
+    throw new Error('Error al mostrar los productos');
    }
     }
 
@@ -74,11 +75,12 @@ async function requestGet(user,password){
       } catch(error) {
         if(error.response) {
           const status = error.response.status;
-          if(status === 400){
+          if(status >=400 && status<=500){
             throw new Error(error.response.data);
           }
         }
-        throw new Error ('Error en la solicitud de almacenamiento de orden')
+        console.log(error)
+        // throw Error ('Error en la solicitud de almacenamiento de orden')
       }
     }
     
