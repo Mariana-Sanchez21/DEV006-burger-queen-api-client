@@ -82,7 +82,30 @@ async function requestGet(user,password){
         console.log(error)
         // throw Error ('Error en la solicitud de almacenamiento de orden')
       }
+    };
+
+    async function requestGetOrders(){
+      const token = localStorage.getItem('token');
+      try{
+    let response = await axios.get('http://localhost:8080/orders',{
+      headers:{
+        "Content-Type": "application/json",
+         "Authorization": `Bearer ${token}` ,
+      },
+    })
+    if(response.status === 200){
+      return response.data;
     }
+   }catch(error) {
+    if(error.response){
+      const status = error.response.status;
+      if (status >=400 && status<=500) {
+        throw new Error(error.response.data);
+      }
+    }
+    throw new Error('Error al mostrar ordenes');
+   }
+      };
     
 
-export {requestGet, requestProduct, requestPostOrder};
+export {requestGet, requestProduct, requestPostOrder, requestGetOrders};

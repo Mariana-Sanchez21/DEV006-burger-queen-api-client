@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { Modal } from '../Modal/Modal';
 import { ClientForm } from '../ClientForm/ClientForm';
 import { requestPostOrder } from '../../functions/request';
+import Swal from 'sweetalert2'
 
 
 function WaiterViewBreakfast(){
@@ -73,43 +74,61 @@ function WaiterViewBreakfast(){
 
 const onSubmitOrder = async (e) => {
   e.preventDefault();
-  try {
-    if (clientInfo && clientTable && selectedProducts.length > 0) {
-      const token = localStorage.getItem('token');
-      const orderData = {
-        clientName: clientInfo,
-        tableNumber: clientTable,
-        products: selectedProducts,
-        
-      };
-      const response = await requestPostOrder(orderData, clientTable, selectedProducts, token);
-      console.log('Response from server:', response);
-      const orderDataString = JSON.stringify(orderData);
-      localStorage.setItem('orderData', orderDataString);
+  Swal.fire({
+    title: 'Estás seguro que deseas mandar a cocina?',
+    text: "No podrás deshacer esta acción!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#4ABC78',
+    cancelButtonColor: '#D64550',
+    confirmButtonText: 'Si, mandar a cocina!',
+    cancelButtonText: 'Cancelar'
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        if (clientInfo && clientTable && selectedProducts.length > 0) {
+          const token = localStorage.getItem('token');
+          const orderData = {
+            clientName: clientInfo,
+            tableNumber: clientTable,
+            products: selectedProducts,
+          };
+          const response = await requestPostOrder(orderData, clientTable, selectedProducts, token);
+          console.log('Response from server:', response);
+          const orderDataString = JSON.stringify(orderData);
+          localStorage.setItem('orderData', orderDataString);
 
-      
-      const sendOrderToKitchen = () => {
-        const orderDataString = localStorage.getItem('orderData');
-        if (orderDataString) {
-          const orderData = JSON.parse(orderDataString);
-        
-          console.log(orderData);
+          const sendOrderToKitchen = () => {
+            const orderDataString = localStorage.getItem('orderData');
+            if (orderDataString) {
+              const orderData = JSON.parse(orderDataString);
+              setSelectedProducts([]);
+              console.log(orderData);
+            } else {
+              console.log('No order data found in local storage.');
+            }
+          };
+
+          sendOrderToKitchen();
+
+          setOrderData([]);
+          localStorage.removeItem('orderData');
+
+          Swal.fire(
+            'Enviado!',
+            'Tu orden ha sido enviada',
+            'success'
+          );
         } else {
-          console.log('No order data found in local storage.');
+          console.log("Por favor, ingrese el nombre del cliente, el número de mesa y seleccione al menos un producto.");
         }
-      };
-
-      sendOrderToKitchen();
-
-      setOrderData([]);
-      localStorage.removeItem('orderData');
-    } else {
-      console.log("Por favor, ingrese el nombre del cliente, el número de mesa y seleccione al menos un producto.");
+      } catch (error) {
+        console.log('error recibiendo orden');
+      }
     }
-  } catch (error) {
-    console.log('error recibiendo orden');
-  }
+  });
 };
+
 
 
 
