@@ -129,9 +129,6 @@ const onSubmitOrder = async (e) => {
   });
 };
 
-
-
-
 const handleOpenModal= () => {
   setOpenModal(true);
 }
