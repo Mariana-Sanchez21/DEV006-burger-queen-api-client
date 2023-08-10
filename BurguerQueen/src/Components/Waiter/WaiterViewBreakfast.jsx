@@ -88,6 +88,7 @@ const onSubmitOrder = async (e) => {
       try {
         if (clientInfo && clientTable && selectedProducts.length > 0) {
           const token = localStorage.getItem('token');
+         
           const orderData = {
             clientName: clientInfo,
             tableNumber: clientTable,
