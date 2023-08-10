@@ -42,6 +42,7 @@ async function requestGet(user,password){
 
     if(response.status === 200){
       return response.data;
+      
     }
    }catch(error) {
     if(error.response){
@@ -106,6 +107,33 @@ async function requestGet(user,password){
     throw new Error('Error al mostrar ordenes');
    }
       };
+
+
+      async function requestGetUser(){   
+        const token = localStorage.getItem('token'); 
+        try{
+      let response = await axios.get('http://localhost:8080/users',{
+        headers:{
+          "Content-Type": "application/json",
+           "Authorization": `Bearer ${token}` ,
+        }, 
+        
+      })
+  
+      if(response.status === 200){
+        return response.data;
+      }
+     }catch(error) {
+      if(error.response){
+        const status = error.response.status;
+        if (status >=400 && status<=500) {
+          throw new Error(error.response.data);
+        } 
+      }
+      throw new Error('Error al mostrar los usuarios');
+     }
+      }
+
     
 
-export {requestGet, requestProduct, requestPostOrder, requestGetOrders};
+export {requestGet, requestProduct, requestPostOrder, requestGetOrders, requestGetUser};
