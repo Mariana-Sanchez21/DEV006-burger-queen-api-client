@@ -76,7 +76,7 @@ async function requestGet(user,password){
       } catch(error) {
         if(error.response) {
           const status = error.response.status;
-          if(status >=400 && status<=500){
+          if( status>=400 ){
             throw new Error(error.response.data);
           }
         }
@@ -100,7 +100,7 @@ async function requestGet(user,password){
    }catch(error) {
     if(error.response){
       const status = error.response.status;
-      if (status >=400 && status<=500) {
+      if (status >=400) {
         throw new Error(error.response.data);
       }
     }

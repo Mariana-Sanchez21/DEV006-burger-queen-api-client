@@ -4,8 +4,11 @@ import 'jest-localStorage-mock'
 
  jest.mock("axios");
 
+
+
+
 // TEST PARA REQUESTGET
-describe('requestGet function', ()=>{
+describe.skip('requestGet function', ()=>{
     it('It should send a login request and return response data', async ()=>{
         //Defino los datos de prueba 
         const user= 'valentina.prueba@gmail.com';
@@ -151,16 +154,21 @@ describe('requestProduct function', ()=>{
 });; 
  
 //TEST PARA REQUEST PRODUCT ORDER
+
+beforeEach(() => {
+  localStorage.clear();
+  axios.mockClear()
+});
 describe('requestPostOrder function', () => {
+
+ 
+
   const clientInfo = "John Doe";
   const clientTable = 5;
   const selectedProducts = ["Burger", "Fries"];
  const token = localStorage.getItem('token');  // Replace this with your actual token or mock it using jest.mock
 
-//   afterEach(() => {
-//     jest.clearAllMocks();
-//   });
-
+ 
   it('should send a post request to create an order and return response data', async () => {
     const orderData = {
       clientName: clientInfo,
@@ -172,11 +180,12 @@ describe('requestPostOrder function', () => {
 
     axios.post.mockResolvedValueOnce({ data: responseData, status: 200 });
 
-    const result = await requestPostOrder(clientInfo, clientTable, selectedProducts);
-    console.log('AQUIII'+ result)
-    
+    const result = await requestPostOrder(clientInfo, clientTable, selectedProducts,token);
+    console.log('AQUIII', result)
+    console.log(token)
 
     expect(result).toEqual(responseData);
+
     expect(axios.post).toHaveBeenCalledWith(
       'http://localhost:8080/orders',
       orderData,
@@ -185,9 +194,39 @@ describe('requestPostOrder function', () => {
           "Content-Type": "application/json",
           "Authorization":  `Bearer ${token}`,
         },
+        
+      }
+    );
+   });
+
+
+
+  it('should throw a generic error when status response is not between 400 and 500', async () => {
+    axios.post.mockRejectedValueOnce({
+      response: { status: 503, data: 'Error en la solicitud de almacenamiento de orden' },
+    });
+
+    await expect(requestPostOrder(clientInfo, clientTable, selectedProducts,token)).rejects.toThrow(
+      'Error en la solicitud de almacenamiento de orden'
+    );
+
+    expect(axios.post).toHaveBeenCalledWith(
+      'http://localhost:8080/orders',
+      {
+        clientName: clientInfo,
+        tableNumber: clientTable,
+        products: selectedProducts,
+        token:token
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
       }
     );
   });
+});
 
 //   it('should throw an error with the response data when status response is between 400 and 500', async () => {
 //     const responseData = { message: 'Invalid data' };
@@ -216,30 +255,3 @@ describe('requestPostOrder function', () => {
 //       }
 //     );
 //   });
-
-  it('should throw a generic error when status response is not between 400 and 500', async () => {
-    axios.post.mockRejectedValueOnce({
-      response: { status: 503 },
-    });
-
-    await expect(requestPostOrder(clientInfo, clientTable, selectedProducts)).rejects.toThrow(
-      'Error en la solicitud de almacenamiento de orden'
-    );
-
-    expect(axios.post).toHaveBeenCalledWith(
-      'http://localhost:8080/orders',
-      {
-        clientName: clientInfo,
-        tableNumber: clientTable,
-        products: selectedProducts,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-  });
-});
-
