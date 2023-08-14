@@ -1,5 +1,5 @@
-import LogoBQ from '../../assets/LogoBQ.png'
-import papelera from '../../assets/papelera.png'
+import LogoBQ from '../../assets/LogoBQ.png';
+import{requestAddNewUser, requestAddNewProduct} from '../../functions/request'
 import { useState } from 'react'
 import { Modal } from '../Modal/Modal';
 import { UserForm } from '../ClientForm/UserForm';
@@ -8,29 +8,48 @@ import {ViewProducts} from './viewProducts'
 import{ViewUsers} from './viewUsers'
 
 
+
 function AdminView(){
 //     // const[showProduct, setShowProduct] = useState(true);
 //   const[selectedProducts, setSelectedProducts] = useState([]);
     const [ openUserModal, setUserOpenModal ] =useState(false);
     const [ openProductModal, setProductOpenModal ] =useState(false);
-    const [UserInfo, setUserInfo] = useState('');
-    const [UserPassword, setUserPassword] = useState('');
-    const [UserRole, setUserRole] = useState('');
-    const [ProductName, setProductName] = useState('');
-    const [ProductPice, setProductPrice] = useState('');
-    const [CategoryName, setCategoryName]= useState('')
+    const [userData, setUserData] = useState([]);
+    const [productData, setProductData]= useState([])
 
-    const onUserInformation=(name,password,role)=>{
-        setUserInfo(name)
-        setUserPassword(password)
-        setUserRole(role)
-      }
-      const onProductInformation = (product,price, category)=>{
-        setProductName(product)
-        setProductPrice(price)
-        setCategoryName(category)
 
+    
+    const handleAddUser = async ({email,password,role})=>{
+      console.log(email,password, role)
+      const newUser = {
+        email : email,
+        password: password,
+        role: role
+      };
+      try{
+        const response = await requestAddNewUser(newUser);
+        setUserData([...userData, response]);
+        console.log('Nuevo usuario creado:',response);
+        console.log(userData)
+      }catch(error){
+        console.log('Error', error )
       }
+    }
+    const handleAddNewProduct = async({name,price,image,type})=>{
+      const newProduct = {
+        name: name,
+        price: price,
+        type: type,
+        image: image
+      };
+    try{
+      const response = await requestAddNewProduct(newProduct);
+      setProductData([...productData, response]);
+      console.log('producto creado', response);
+    } catch(error){
+      console.log('Error', error );
+    }
+    }
      
    
    return (
@@ -49,22 +68,22 @@ function AdminView(){
    <button onClick={()=>setUserOpenModal(true)} className='lg:mr-96 font-bold border-4 border-secondary rounded-sm shadow-lg hover:scale-125 lg:p-2 lg:text-xl font-retro1 md:ml-3'>Nuevo Usuario</button>
    {openUserModal && (
     <Modal>
-      <UserForm setUserOpenModal={setUserOpenModal}  onUserInformation={onUserInformation}  />
+      <UserForm setUserOpenModal={setUserOpenModal} handleAddUser={handleAddUser} addNewUser={handleAddUser} />
     </Modal>
    )}
      <button onClick={()=>setProductOpenModal(true)}  className='border-4 border-tertiary rounded-sm shadow-lg lg:-mr-20 lg:p-2 font-bold lg:text-xl font-retro1 hover:scale-125'>Nuevo Producto</button>
      {openProductModal && (
     <Modal>
-      <ProductForm setProductOpenModal={setProductOpenModal} onProductInformation={onProductInformation} />
+      <ProductForm setProductOpenModal={setProductOpenModal}  handleAddNewProduct={handleAddNewProduct}  />
     </Modal>
    )}
  </div>
  <section className='lg:grid lg:grid-cols-2 lg:gap-20 lg:mt-10'>  
-    <article>
-      <ViewProducts />
-  </article>
   <article className='lg:mt-14 lg:mr-16'>
-    <ViewUsers />
+    <ViewUsers userData={userData} setUsersData={setUserData}/>
+  </article>
+  <article>
+      <ViewProducts productData={productData} setProductData={setProductData} />
   </article>
  </section>
 
