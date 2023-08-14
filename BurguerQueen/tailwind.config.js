@@ -24,7 +24,8 @@ export default {
           tertiary: '#F29727',
           quaternary: '#F24C3D',
           btn1: '#4ABC78',
-          btn2: '#D64550'
+          btn2: '#D64550',
+          extra: '#D4A61E'
       
       },
       spacing: {
@@ -32,7 +33,8 @@ export default {
         hForm:'50rem',
         mlForm:'40rem',
         mrForm:'-21rem',
-        mtboton:'30rem'
+        mtboton:'30rem',
+        mlwarning:'26rem'
        
       },
       
