@@ -4,16 +4,18 @@ import { requestGetOrders, sendOrderToDatabase } from "../../functions/request";
 import warning from '../../assets/warning.png';
 import Swal from 'sweetalert2';
 import { Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 function KitchenView() {
+  const history = useNavigate();
   const [ordersData, setOrdersData] = useState([]);
   const [completedOrders, setCompletedOrders] = useState({});
 
   function orderDone(orderId, clientInfo, clientTable, selectedProducts) {
     const token = localStorage.getItem('token');
     const completionTime = Date.now() / 1000; 
+    history.push(`/ReadyToServe?completionTime=${completionTime}`);
     sendOrderToDatabase(orderId, clientInfo, clientTable, selectedProducts, token)
-  
       .then(() => {
         Swal.fire({
           title: 'Estás seguro que deseas completar esta orden?',
@@ -27,10 +29,11 @@ function KitchenView() {
         }).then((result) => {
           if (result.isConfirmed) {
             setOrdersData(prevOrders => prevOrders.filter(order => order.id !== orderId));
-          setCompletedOrders(prevCompletedOrders => ({
-            ...prevCompletedOrders,
-            [orderId]: completionTime,
-          }));
+            console.log('Setting completion time:', orderId, completionTime);
+            setCompletedOrders(prevCompletedOrders => ({
+              ...prevCompletedOrders,
+              [orderId]: completionTime,
+            }));
             Swal.fire(
               'Enviado!',
               'Orden completada.',
@@ -66,6 +69,7 @@ function KitchenView() {
   };
 
   const OrderTimer = ({ order }) => {
+    console.log("Current Order:", order); 
     const localStorageKey = `orderStartTime_${order.id}`;
     const [startTime, setStartTime] = useState(() => {
       const storedStartTime = parseFloat(localStorage.getItem(localStorageKey));
@@ -104,7 +108,7 @@ function KitchenView() {
         </div>
         <ul className='bg-gray lg:flex lg:items-center md:flex md:items-center'>
           <li className='lg:ml-mtboton lg:pl-36 lg:-mt-16 lg:text-xl md:ml-72 md:-mt-6 md:text-2xl font-retro2'>
-            <Link to='/ReadyToServe'>Historial de Ordenes</Link>
+            <Link to='/ReadyToServe'>Ordenes listas</Link>
           </li>
         </ul>
       </nav>
