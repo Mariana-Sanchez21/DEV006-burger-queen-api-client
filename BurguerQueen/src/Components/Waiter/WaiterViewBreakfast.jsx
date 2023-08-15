@@ -6,6 +6,7 @@ import { Modal } from '../Modal/Modal';
 import { ClientForm } from '../ClientForm/ClientForm';
 import { requestPostOrder } from '../../functions/request';
 import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom';
 
 
 function WaiterViewBreakfast(){
@@ -142,7 +143,7 @@ const handleOpenModal= () => {
  </div>
 
  <ul className=' flex lg:h-16 mt-8 lg:w-hForm mr-36 sm:h-9 sm:w-80 sm:ml-24 sm:justify-around bg-blue '> 
-   <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl font-retro2 lg:mr-20 md:text-lg md:-ml-36'>Ordenes Listas</li>
+ <Link to='/ReadyToServe' className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl font-retro2 lg:mr-20 md:text-lg md:-ml-36'>Ordenes Listas</Link>
    <li className='lg:mb-20 sm:mb-24 border-red-600 lg:text-3xl font-retro2 lg:mr-20 md:text-lg'>Historial de Ordenes</li>
  </ul>
  </nav> 

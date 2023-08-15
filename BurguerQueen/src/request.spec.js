@@ -147,19 +147,19 @@ describe('requestProduct function', ()=>{
      });
 
      it('should throw message "Error al mostrar los productos" when the error is not controlled', async ()=>{
-        axios.post = jest.fn().mockRejectedValueOnce(new Error('Network error'));
+        axios.get = jest.fn().mockRejectedValueOnce(new Error('Network error'));
 
         await expect(requestProduct()).rejects.toThrow('Error al mostrar los productos');
      });
 });; 
  
 //TEST PARA REQUEST PRODUCT ORDER
-
-beforeEach(() => {
-  localStorage.clear();
-  axios.mockClear()
-});
 describe('requestPostOrder function', () => {
+  
+  beforeEach(() => {
+    localStorage.clear();
+    axios.post.mockReset()
+  });
 
  
 
@@ -215,8 +215,7 @@ describe('requestPostOrder function', () => {
       {
         clientName: clientInfo,
         tableNumber: clientTable,
-        products: selectedProducts,
-        token:token
+        products: selectedProducts
       },
       {
         headers: {
