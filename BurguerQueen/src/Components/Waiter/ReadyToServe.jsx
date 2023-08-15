@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import { requestGetCompletedOrders } from "../../functions/request";
 import checkmarkIcon from '../../assets/checkmark (2).png';
 import LogoBQ from '../../assets/LogoBQ.png';
-
+import { useLocation } from "react-router-dom";
 
 function ReadyToServe() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const completionTime = queryParams.get("completionTime"); // This gets the completionTime from the query parameter
   const [completedOrders, setCompletedOrders] = useState([]);
 
   const showCompletedOrders = async () => {
@@ -21,24 +24,26 @@ function ReadyToServe() {
     showCompletedOrders();
   }, []);
 
-  const formatTime = (timestamp) => {
-    const date = new Date(timestamp);
-    if (!isNaN(date)) {
-      return date.toLocaleTimeString();
-    } else {
-      return "Invalid Date";
-    }
+  const formatTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secondsRemaining = seconds % 60;
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secondsRemaining.toString().padStart(2, '0')}`;
   };
-
+  
   const formatElapsedTime = (dateProcessed, completionTime) => {
+
     if (!dateProcessed || !completionTime) {
       return "N/A";
     }
-
-    const elapsedTime = (completionTime * 1000) - dateProcessed;
-    return formatTime(Math.floor(elapsedTime / 1000));
+  
+    const processedTimestamp = new Date(dateProcessed).getTime() / 1000;
+    const elapsedTimeInSeconds = completionTime - processedTimestamp;
+    console.log(processedTimestamp)
+    console.log(elapsedTimeInSeconds)
+    return formatTime(elapsedTimeInSeconds);
   };
-
+  
   return (
     <>
       <nav className='bg-primary lg:h-28 md:h-20'>
@@ -46,7 +51,7 @@ function ReadyToServe() {
           <img className='' src={LogoBQ} alt="logo" />
         </div>
         <ul className='bg-gray lg:flex lg:items-center md:flex md:items-center'>
-          <li className='lg:ml-mtboton lg:pl-36 lg:-mt-16 lg:text-xl md:ml-72 md:-mt-6 md:text-2xl font-retro2'>Historial de Ordenes</li>
+          <li className='lg:ml-mtboton lg:pl-36 lg:-mt-16 lg:text-xl md:ml-72 md:-mt-6 md:text-2xl font-retro2'>Ordenes Listas</li>
         </ul>
       </nav>
       <main className="bg-black flex flex-col items-center">
@@ -68,7 +73,7 @@ function ReadyToServe() {
                   ))}
                 </ul>
               </div>
-              <p className="font-retro2 lg:ml-4 md:ml-5">Tiempo de Completado: {formatElapsedTime(order.dateProcessed, order.completionTime)}</p>
+              <p className="font-retro2 lg:ml-4 md:ml-5">Tiempo de Completado: {formatElapsedTime(order.dateProcessed, completionTime)}</p> {/* Use the completionTime */}
             </div>
             <img className="md:w-10 absolute top-4 right-4 md:mt-7" src={checkmarkIcon} alt="checkmark" />
           </article>
