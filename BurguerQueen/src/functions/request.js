@@ -232,6 +232,50 @@ async function requestGet(user,password){
 
  };
 
+ //Función para actualizar datos de producto
+ async function requestUpdateProduct(productId,updatedData){
+  const token = localStorage.getItem('token'); 
+  try{
+    const response = await axios.put(`http://localhost:8080/products/${productId}`,updatedData, {
+      headers: {
+        "Authorization": `Bearer ${token}` ,
+      },
+    });
+    return response.data;
+  }catch(error){
+    if(error.response){
+      const status = error.response.status;
+      if(status >=400 && status <=500){
+        throw new Error(error.response.data);
+      }
+      console.log(response.data);
+  }
+  throw new Error('Error al actuallizar productos');
+ }
+}
+
+ //Función para actualizar datos de usuario
+ async function requestUpdateUser(userId,updateData){
+  const token = localStorage.getItem('token'); 
+  try{
+    const response = await axios.put(`http://localhost:8080/users/${userId}`,updateData, {
+      headers: {
+        "Authorization": `Bearer ${token}` ,
+      },
+    });
+    return response.data;
+  }catch(error){
+    if(error.response){
+      const status = error.response.status;
+      if(status >=400 && status <=500){
+        throw new Error(error.response.data);
+      }
+      console.log(response.data);
+  }
+  throw new Error('Error al actuallizar usuarios');
+ }
+}
+
  //NUEVAS FUNCIONES
  async function sendOrderToDatabase(orderId, clientInfo, clientTable, selectedProducts, token) {
   const orderData = {
@@ -288,4 +332,4 @@ throw new Error('Error al mostrar ordenes');
     
     
 
-export {requestGet, requestProduct, requestPostOrder, requestGetOrders, requestGetUser, requestAddNewUser, requestAddNewProduct, requestDeleteProduct, requestDeleteUser,sendOrderToDatabase, requestGetCompletedOrders};
+export {requestGet, requestProduct, requestPostOrder, requestGetOrders, requestGetUser, requestAddNewUser, requestAddNewProduct, requestDeleteProduct, requestDeleteUser,sendOrderToDatabase, requestGetCompletedOrders,requestUpdateProduct,requestUpdateUser};

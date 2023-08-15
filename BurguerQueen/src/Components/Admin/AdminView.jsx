@@ -8,15 +8,11 @@ import {ViewProducts} from './viewProducts'
 import{ViewUsers} from './viewUsers'
 
 
-
 function AdminView(){
-//     // const[showProduct, setShowProduct] = useState(true);
-//   const[selectedProducts, setSelectedProducts] = useState([]);
     const [ openUserModal, setUserOpenModal ] =useState(false);
     const [ openProductModal, setProductOpenModal ] =useState(false);
     const [userData, setUserData] = useState([]);
     const [productData, setProductData]= useState([])
-
 
     
     const handleAddUser = async ({email,password,role})=>{
@@ -68,7 +64,7 @@ function AdminView(){
    <button onClick={()=>setUserOpenModal(true)} className='lg:mr-96 font-bold border-4 border-secondary rounded-sm shadow-lg hover:scale-125 lg:p-2 lg:text-xl font-retro1 md:ml-3'>Nuevo Usuario</button>
    {openUserModal && (
     <Modal>
-      <UserForm setUserOpenModal={setUserOpenModal} handleAddUser={handleAddUser} addNewUser={handleAddUser} />
+      <UserForm setUserOpenModal={setUserOpenModal} handleAddUser={handleAddUser} />
     </Modal>
    )}
      <button onClick={()=>setProductOpenModal(true)}  className='border-4 border-tertiary rounded-sm shadow-lg lg:-mr-20 lg:p-2 font-bold lg:text-xl font-retro1 hover:scale-125'>Nuevo Producto</button>
