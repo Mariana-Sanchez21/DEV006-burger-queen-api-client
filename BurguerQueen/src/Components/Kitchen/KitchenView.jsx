@@ -4,17 +4,15 @@ import { requestGetOrders, sendOrderToDatabase } from "../../functions/request";
 import warning from '../../assets/warning.png';
 import Swal from 'sweetalert2';
 import { Link } from "react-router-dom";
-import { useNavigate} from "react-router-dom";
 
 function KitchenView() {
-  const history = useNavigate();
   const [ordersData, setOrdersData] = useState([]);
   const [completedOrders, setCompletedOrders] = useState({});
 
   function orderDone(orderId, clientInfo, clientTable, selectedProducts) {
     const token = localStorage.getItem('token');
-    const completionTime = Date.now() / 1000; 
-    history.push(`/ReadyToServe?completionTime=${completionTime}`);
+    const completionTime = Date.now() / 1000;
+    localStorage.setItem(`completionTime_${orderId}`, completionTime);
     sendOrderToDatabase(orderId, clientInfo, clientTable, selectedProducts, token)
       .then(() => {
         Swal.fire({
@@ -73,6 +71,8 @@ function KitchenView() {
     const localStorageKey = `orderStartTime_${order.id}`;
     const [startTime, setStartTime] = useState(() => {
       const storedStartTime = parseFloat(localStorage.getItem(localStorageKey));
+    
+
       return !isNaN(storedStartTime) ? storedStartTime : Date.now() / 1000;
     });
 
@@ -96,7 +96,7 @@ function KitchenView() {
     const elapsedTimeWithCompletion = completionTime ? completionTime - startTime : elapsedTime;
 
     return (
-      <p className="font-retro2 lg:ml-64 md:ml-44">Tiempo transcurrido: {formatTime(Math.floor(elapsedTimeWithCompletion))}</p>
+      <p className="font-retro2 lg:ml-64 md:ml-40 lg:pt-6 md:pt-6">Tiempo transcurrido: {formatTime(Math.floor(elapsedTimeWithCompletion))}</p>
     );
   };
 
@@ -107,17 +107,17 @@ function KitchenView() {
           <img className='' src={LogoBQ} alt="logo" />
         </div>
         <ul className='bg-gray lg:flex lg:items-center md:flex md:items-center'>
-          <li className='lg:ml-mtboton lg:pl-36 lg:-mt-16 lg:text-xl md:ml-72 md:-mt-6 md:text-2xl font-retro2'>
-            <Link to='/ReadyToServe'>Ordenes listas</Link>
+          <li className='lg:ml-mlready lg:pl-36 lg:-mt-16 lg:text-xl md:ml-72 md:-mt-6 md:text-2xl font-retro2'>
+            <Link to='/ReadyToServe' >Ordenes listas</Link>
           </li>
         </ul>
       </nav>
       <main className="bg-black flex flex-col items-center">
         {ordersData.map((order, index) => (
-          <article key={index} className="lg:mt-4 lg:w-hForm md:mt-3 md:w-h relative md:mb-7 lg:">
-            <div className="order-card rounded-2xl bg-primary md:pb-2 lg:p-3">
+          <article key={index} className="lg:mt-4 lg:w-hForm md:mt-3 md:w-h relative md:mb-7 ">
+            <div className="order-card rounded-2xl bg-black text-white  md:pb-10 md:mt-8 lg:p-3 border-4 border-secondary  shadow-lg">
               <div className="lg:mt-3 md:mt-3">
-                <h2 className="lg:ml-80 lg:mt-10 md:ml-60 lg:text-3xl md:text-2xl md:mt-10 font-retro2">Orden #{order.id}</h2>
+                <h2 className="lg:ml-80 lg:mt-8 md:ml-52 lg:text-3xl md:text-2xl md:mt-10 font-retro2 text-tertiary ">Orden #{order.id}</h2>
               </div>
               <OrderTimer order={order} />
               <div className="flex flex-row lg:mt-3 md:mt-5 justify-between">

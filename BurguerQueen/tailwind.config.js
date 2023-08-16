@@ -34,7 +34,9 @@ export default {
         mlForm:'40rem',
         mrForm:'-21rem',
         mtboton:'30rem',
-        mlwarning:'26rem'
+        mlwarning:'26rem',
+        mlready:'36rem',
+        mtminus:'-1.5499999999999998rem'
        
       },
       
