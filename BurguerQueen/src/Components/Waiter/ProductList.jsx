@@ -43,7 +43,7 @@ function ProductList({showBreakfast,addToSelectedProducts, decreaseFromSelectedP
             </button>
             <span>{product.quantity}</span>
             <button onClick={()=> {decreaseFromSelectedProducts(product)}}>
-                <img className='lg:w-5 lg:h-2 lg:mb-1 hover:scale-125 md:w-4 md:h-2 md:ml-8 md:mb-3' src={signoMenos} alt="menos" />
+                <img className='lg:w-5 lg:h-2 lg:mt-mtminus hover:scale-125 md:w-4 md:h-2 md:ml-8 md:mb-3' src={signoMenos} alt="menos" />
             </button>
             
         </div>
