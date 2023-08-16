@@ -8,7 +8,7 @@ import 'jest-localStorage-mock'
 
 
 // TEST PARA REQUESTGET
-describe.skip('requestGet function', ()=>{
+describe('requestGet function', ()=>{
     it('It should send a login request and return response data', async ()=>{
         //Defino los datos de prueba 
         const user= 'valentina.prueba@gmail.com';
