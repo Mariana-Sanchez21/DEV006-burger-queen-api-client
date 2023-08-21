@@ -138,7 +138,7 @@ const handleOpenModal= () => {
     return (
    <section className=' bg-black text-white '>
  <nav className=' bg-primary lg:h-28 flex justify-between text-black sm:w-full sm:h-20 font-bold'>
- <div className='  lg:h-24 lg:w-28 sm:h-32  sm:w-44  md:h-14 md:w-20 '>
+ <div className='  lg:h-24 lg:w-28 sm:h-32  sm:w-44   '>
    <img className='' src={LogoBQ} alt="logo" />
  </div>
 
