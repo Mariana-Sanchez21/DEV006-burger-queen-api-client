@@ -95,6 +95,7 @@ async function requestGet(user,password){
       },
     })
     if(response.status === 200){
+      console.log(response.data)
       return response.data;
     }
    }catch(error) {
@@ -282,8 +283,7 @@ async function requestGet(user,password){
     clientName: clientInfo,
     tableNumber: clientTable,
     products: selectedProducts,
-    status: "delivered", // Add the status field to update the order status
-    dateProcessed: new Date().toISOString(), // Add the dateProcessed field with the current timestamp
+   
   };
   try {
     const response = await axios.patch(`http://localhost:8080/orders/${orderId}`, orderData, {

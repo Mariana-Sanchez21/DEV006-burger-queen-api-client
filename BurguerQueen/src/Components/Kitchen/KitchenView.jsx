@@ -11,8 +11,7 @@ function KitchenView() {
 
   function orderDone(orderId, clientInfo, clientTable, selectedProducts) {
     const token = localStorage.getItem('token');
-    const completionTime = Date.now() / 1000;
-    localStorage.setItem(`completionTime_${orderId}`, completionTime);
+   
     sendOrderToDatabase(orderId, clientInfo, clientTable, selectedProducts, token)
       .then(() => {
         Swal.fire({
@@ -27,10 +26,8 @@ function KitchenView() {
         }).then((result) => {
           if (result.isConfirmed) {
             setOrdersData(prevOrders => prevOrders.filter(order => order.id !== orderId));
-            console.log('Setting completion time:', orderId, completionTime);
             setCompletedOrders(prevCompletedOrders => ({
               ...prevCompletedOrders,
-              [orderId]: completionTime,
             }));
             Swal.fire(
               'Enviado!',
@@ -48,57 +45,29 @@ function KitchenView() {
   const showOrders = async () => {
     try {
       const response = await requestGetOrders();
+      console.log(response.data);
+      
       const incompleteOrders = response.filter(order => order.status !== 'delivered' && !completedOrders[order.id]);
+      console.log(incompleteOrders);
+      
       setOrdersData(incompleteOrders);
     } catch (error) {
       console.error(error.message);
     }
   };
+  
 
   useEffect(() => {
     showOrders();
+    console.log('se renderiza una vez')
   }, []);
 
-  const formatTime = (seconds) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secondsRemaining = seconds % 60;
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secondsRemaining.toString().padStart(2, '0')}`;
-  };
+ 
 
-  const OrderTimer = ({ order }) => {
-    console.log("Current Order:", order); 
-    const localStorageKey = `orderStartTime_${order.id}`;
-    const [startTime, setStartTime] = useState(() => {
-      const storedStartTime = parseFloat(localStorage.getItem(localStorageKey));
-    
 
-      return !isNaN(storedStartTime) ? storedStartTime : Date.now() / 1000;
-    });
 
-    const [elapsedTime, setElapsedTime] = useState(0);
-    const intervalRef = useRef(null);
 
-    useEffect(() => {
-      intervalRef.current = setInterval(() => {
-        const currentTime = Date.now() / 1000;
-        setElapsedTime(currentTime - startTime);
-      }, 1000);
 
-      return () => clearInterval(intervalRef.current);
-    }, [startTime]);
-
-    useEffect(() => {
-      localStorage.setItem(localStorageKey, startTime.toString());
-    }, [localStorageKey, startTime]);
-
-    const completionTime = completedOrders[order.id]; 
-    const elapsedTimeWithCompletion = completionTime ? completionTime - startTime : elapsedTime;
-
-    return (
-      <p className="font-retro2 lg:ml-64 md:ml-40 lg:pt-6 md:pt-6">Tiempo transcurrido: {formatTime(Math.floor(elapsedTimeWithCompletion))}</p>
-    );
-  };
 
   return (
     <>
@@ -119,7 +88,7 @@ function KitchenView() {
               <div className="lg:mt-3 md:mt-3">
                 <h2 className="lg:ml-80 lg:mt-8 md:ml-52 lg:text-3xl md:text-2xl md:mt-10 font-retro2 text-tertiary ">Orden #{order.id}</h2>
               </div>
-              <OrderTimer order={order} />
+      
               <div className="flex flex-row lg:mt-3 md:mt-5 justify-between">
                 <p className="font-retro2 lg:text-xl md:text-lg">Nombre del cliente: {order.clientName.clientName}</p>
                 <p className="font-retro2 lg:mr-4 md:mr-4 lg:text-xl md:text-lg">Numero de mesa: {order.tableNumber}</p>
