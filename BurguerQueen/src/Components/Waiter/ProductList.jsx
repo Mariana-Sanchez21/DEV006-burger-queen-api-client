@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { requestProduct } from '../../functions/request';
-import signoMas from '../../assets/simboloMas.png'
-import signoMenos from '../../assets/simboloMenos.png'
+import signoMas from '../../assets/SimboloMas.png'
+import signoMenos from '../../assets/SimboloMenos.png'
 
 function ProductList({showBreakfast,addToSelectedProducts, decreaseFromSelectedProducts}){
     const [productsData, setProductsData] = useState([]);
